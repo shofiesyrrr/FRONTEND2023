@@ -1,24 +1,21 @@
 import Movie from "../Movie/Movie.jsx";
 import styles from "./Movies.module.css";
-import data from "../../utils/constants/data.js";
-import { useState } from "react";
 import { nanoid } from "nanoid";
 
-const Movies = () => {
-  const [movies, setMovies] = useState(data);
+const Movies = (props) => {
+  const {movies, setMovies} = props;
 
-  function handleClick() {
-    const newMovie = {
-      id: nanoid(),
-      title: "Iron Man",
-      year: "2019",
-      type: "Movie",
-      poster:
-        "https://m.media-amazon.com/images/M/MV5BZWMyYzFjYTYtNTRjYi00OGExLWE2YzgtOGRmYjAxZTU3NzBiXkEyXkFqcGdeQXVyMzQ0MzA0NTM@._V1_SX300.jpg",
-    };
+      function handleClick() {
+        const newMovie = {
+          id:nanoid(), 
+          title: "Barbie",
+          year: 2019, 
+          type: "Movie",
+          poster: "https://picsum.photos/300/400",
+        };
 
-    setMovies([...movies, newMovie]);
-  }
+        setMovies([...movies, newMovie]);
+      }
 
   return (
     <div className={styles.container}>

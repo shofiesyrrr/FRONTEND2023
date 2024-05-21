@@ -1,29 +1,83 @@
-import styles from './Form.module.css'; // Import CSS Modules
+import React, { useState } from "react";
+import styles from "./Form.module.css";
+import icon2 from "../assets/image/icon2.png";
+import Alert from "./Alert.jsx";
+import { nanoid } from "nanoid";
 
-const MovieAddForm = ({ onSubmit }) => {
+const Form = (props) => {
+  const { movies, setMovies } = props;
+  const [title, setTitle] = useState("");
+  const [year, setYear] = useState("");
+  const [isTitleError, setIsTitleError] = useState(false);
+  const [isDateError, setIsDateError] = useState(false);
 
+  function handleTitle(e) {
+    setTitle(e.target.value);
+  }
+  function handleYear(e) {
+    setYear(e.target.value);
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    if (title === "") {
+      setIsTitleError(true);
+    } else if (year === "") {
+      setIsDateError(true);
+    } else {
+      const movie = {
+        id: nanoid(),
+        title: title,
+        year: year,
+        type: "Movie",
+        poster: "https://picsum.photos/300/400",
+      };
+      setMovies([...movies, movie]);
+
+      setIsTitleError(false);
+      setIsDateError(false);
+    }
+  }
 
   return (
-    <form className={styles.form}>
-      <h2>Add Movie</h2>
-      <label htmlFor="title">Title:</label>
-      <input
-      id='title'
-        type="text"
-        className={styles.titleInput}
-      />
-
-      <label htmlFor="year">Year:</label>
-      <input
-      id='year'
-        type="text"
-        className={styles.genreInput}
-      />
-      <button type="submit" className={styles.submitButton}>
-        Add Movie
-      </button>
-    </form>
+    <div id="form" className={styles.container}>
+      <form onSubmit={handleSubmit}>
+        <section className={styles.form}>
+          <div className={styles.form__right}>
+            <h2 className={styles.title}>Form Covid</h2>
+            <div className={styles.formGroup}>
+              <label htmlFor="title">Title</label>
+              <input
+                onChange={handleTitle}
+                type="text"
+                id="title"
+                className={styles.formInput}
+                value={title}
+              />
+              {isTitleError && <Alert>Title Wajib Diisi</Alert>}
+            </div>
+            <div className={styles.formGroup}>
+              <label htmlFor="date">Date</label>
+              <input
+                onChange={handleYear}
+                type="number"
+                id="date"
+                className={styles.formInput}
+                value={year}
+              />
+              {isDateError && <Alert>Date Wajib Diisi</Alert>}
+            </div>
+            <button type="submit" className={styles.submitButton}>
+              Submit
+            </button>
+          </div>
+          <div className={styles.form__left}>
+            <img className={styles.form__image} src={icon2} alt="example" />
+          </div>
+        </section>
+      </form>
+    </div>
   );
 };
 
-export default MovieAddForm;
+export default Form;
