@@ -7,56 +7,78 @@ import { nanoid } from "nanoid";
 const Form = (props) => {
   const { movies, setMovies } = props;
   const [formInput, setFormInput] = useState({
-    title: "",
-    year: "",
-    poster: "",
-    type: "Action",
+    title: {
+      value: "",
+      error: "",
+    },
+    year: {
+      value: "",
+      error: "",
+    },
+    poster: {
+      value: "",
+      error: "",
+    },
+    type: {
+      value: "Action",
+    },
   });
-  const [isTitleError, setIsTitleError] = useState(false);
-  const [isDateError, setIsDateError] = useState(false);
-  const [isPosterError, setIsPosterError] = useState(false);
 
-  function handleTitle(e) {
+  function handleChange(e) {
+    const { name, value } = e.target;
     setFormInput({
       ...formInput,
-      title: e.target.value,
-    });
-  }
-  function handleYear(e) {
-    setFormInput({
-      ...formInput,
-      year: e.target.value,
-    });
-  }
-
-  function handlePoster(e) {
-    setFormInput({
-      ...formInput,
-      poster: e.target.value,
-    });
-  }
-
-  function handleType(e) {
-    setFormInput({
-      ...formInput,
-      type: e.target.value,
+      [name]: {
+        ...formInput[name],
+        value: value,
+      },
     });
   }
 
   function validate() {
-    if (formInput.title === "") {
-      setIsTitleError(true);
+    if (formInput.title.value === "") {
+      setFormInput({
+        ...formInput,
+        title: {
+          ...formInput.title,
+          error: true,
+        },
+      });
       return false;
-    } else if (formInput.year === "") {
-      setIsDateError(true);
+    } else if (formInput.year.value === "") {
+      setFormInput({
+        ...formInput,
+        year: {
+          ...formInput.year,
+          error: true,
+        },
+      });
       return false;
-    } else if (formInput.poster === "") {
-      setIsPosterError(true);
+    } else if (formInput.poster.value === "") {
+      setFormInput({
+        ...formInput,
+        poster: {
+          ...formInput.poster,
+          error: true,
+        },
+      });
       return false;
     } else {
-      setIsTitleError(false);
-      setIsDateError(false);
-      setIsPosterError(false)
+      setFormInput({
+        ...formInput,
+        title: {
+          ...formInput.title,
+          error: false,
+        },
+        year: {
+          ...formInput.year,
+          error: false,
+        },
+        poster: {
+          ...formInput.poster,
+          error: false,
+        },
+      });
       return true;
     }
   }
@@ -66,13 +88,12 @@ const Form = (props) => {
     validate() && addMovie();
   }
 
-
   function addMovie() {
     const movie = {
       id: nanoid(),
-      title: formInput.title,
-      year: formInput.year,
-      type: formInput.type,
+      title: formInput.title.value,
+      year: formInput.year.value,
+      type: formInput.type.value,
       poster: "https://picsum.photos/300/400",
     };
     setMovies([...movies, movie]);
@@ -87,49 +108,52 @@ const Form = (props) => {
             <div className={styles.formGroup}>
               <label htmlFor="title">Title</label>
               <input
-                onChange={handleTitle}
+                onChange={handleChange}
                 type="text"
                 id="title"
+                name="title"
                 className={styles.formInput}
-                value={formInput.title}
+                value={formInput.title.value}
               />
-              {isTitleError && <Alert>Title Wajib Diisi</Alert>}
+              {formInput.title.error && <Alert>Title Wajib Diisi</Alert>}
             </div>
             <div className={styles.formGroup}>
-              <label htmlFor="date">Date</label>
+              <label htmlFor="year">Date</label>
               <input
-                onChange={handleYear}
+                onChange={handleChange}
                 type="number"
-                id="date"
+                id="year"
+                name="year"
                 className={styles.formInput}
-                value={formInput.year}
+                value={formInput.year.value}
               />
-              {isDateError && <Alert>Date Wajib Diisi</Alert>}
+              {formInput.year.error && <Alert>Date Wajib Diisi</Alert>}
             </div>
             <div className={styles.formGroup}>
               <label htmlFor="poster">Poster</label>
               <input
                 type="text"
                 id="poster"
+                name="poster"
                 className={styles.formInput}
-                value={formInput.poster}
-                onChange={handlePoster}
+                value={formInput.poster.value}
+                onChange={handleChange}
               />
-              {isPosterError && <Alert>Poster Wajib Diisi</Alert>}
+              {formInput.poster.error && <Alert>Poster Wajib Diisi</Alert>}
             </div>
             <div className={styles.formGroup}>
               <label htmlFor="type">Type</label>
               <select
-                onChange={handleType}
-                name="type"
                 id="type"
-                value={formInput.type}
+                name="type"
+                value={formInput.type.value}
+                onChange={handleChange}
                 className={styles.formInput}
               >
                 <option value="Action">Action</option>
-                <option value="Action">Drama</option>
-                <option value="Action">Horor</option>
-                <option value="Action">Comedy</option>
+                <option value="Drama">Drama</option>
+                <option value="Horror">Horror</option>
+                <option value="Comedy">Comedy</option>
               </select>
             </div>
             <button type="submit" className={styles.submitButton}>
