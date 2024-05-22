@@ -43,29 +43,39 @@ const Form = (props) => {
     });
   }
 
-  
+  function validate() {
+    if (formInput.title === "") {
+      setIsTitleError(true);
+      return false;
+    } else if (formInput.year === "") {
+      setIsDateError(true);
+      return false;
+    } else if (formInput.poster === "") {
+      setIsPosterError(true);
+      return false;
+    } else {
+      setIsTitleError(false);
+      setIsDateError(false);
+      setIsPosterError(false)
+      return true;
+    }
+  }
 
   function handleSubmit(e) {
     e.preventDefault();
-    if (formInput.title === "") {
-      setIsTitleError(true);
-    } else if (formInput.year === "") {
-      setIsDateError(true);
-    } else if (formInput.poster === "") {
-        setIsPosterError(true);
-    } else {
-      const movie = {
-        id: nanoid(),
-        title: formInput.title,
-        year: formInput.year,
-        type: formInput.type,
-        poster: "https://picsum.photos/300/400",
-      };
-      setMovies([...movies, movie]);
+    validate() && addMovie();
+  }
 
-      setIsTitleError(false);
-      setIsDateError(false);
-    }
+
+  function addMovie() {
+    const movie = {
+      id: nanoid(),
+      title: formInput.title,
+      year: formInput.year,
+      type: formInput.type,
+      poster: "https://picsum.photos/300/400",
+    };
+    setMovies([...movies, movie]);
   }
 
   return (
