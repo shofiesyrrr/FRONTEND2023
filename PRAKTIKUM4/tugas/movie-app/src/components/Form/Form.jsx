@@ -104,7 +104,7 @@ const Form = (props) => {
       <form onSubmit={handleSubmit}>
         <section className={styles.form}>
           <div className={styles.form__right}>
-            <h2 className={styles.title}>Form Covid</h2>
+            <h2 className={styles.title}>Add Movie</h2>
             <div className={styles.formGroup}>
               <label htmlFor="title">Title</label>
               <input
