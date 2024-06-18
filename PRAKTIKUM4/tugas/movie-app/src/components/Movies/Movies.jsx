@@ -1,4 +1,5 @@
 import Movie from "../Movie/Movie.jsx";
+import Button from "../ui/Button/index.jsx";
 import styles from "./Movies.module.css";
 import { nanoid } from "nanoid";
 
@@ -26,7 +27,7 @@ const Movies = (props) => {
             <Movie movie={movie} key={movie.id} />
           ))}
         </div>
-        <button onClick={handleClick}>Add Movie</button>
+        <Button onClick={handleClick}>Add Movie</Button>
       </section>
     </div>
   );

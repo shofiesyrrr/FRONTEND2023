@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import Button from "../ui/Button"
+import Button from "../ui/Button";
+import axios from "axios";
 
 const StyledHero = styled.div`
   /* Small Screen */
@@ -61,38 +62,62 @@ const StyledHero = styled.div`
   }
 `;
 
-const Hero = () => {
-  const [movies, setMovies] = useState([]);
-
-  const fetchMovies = async () => {
-    const response = await fetch(
-      "https://www.omdbapi.com/?apikey=fcf50ae6&i=tt2975590"
-    );
-
-    const data = await response.json();
-
-    setMovies(data);
-  };
+function Hero() {
+  const [movie, setMovie] = useState([]);
+  const genres = movie.genres
+    ? movie.genres.map((genre) => genre.name).join(", ")
+    : "";
+  const idTrailer = movie.videos ? movie.videos.results[0].key : "";
+  const tmdbImage = `https://image.tmdb.org/t/p/w300/${movie.backdrop_path}`;
 
   useEffect(() => {
-    fetchMovies();
+    const API_KEY = import.meta.env.VITE_API_KEY;
+
+    async function getFirstTrendingMovies() {
+      const URL = `https://api.themoviedb.org/3/trending/movie/day?api_key=${API_KEY}`;
+      const response = await axios(URL);
+
+      const firstMovie = response.data.results[0];
+
+      return firstMovie;
+    }
+
+    async function getMovieDetails(movie) {
+      const trendingMovie = await getFirstTrendingMovies();
+      const id = trendingMovie.id;
+
+      const URL = `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&append_to_response=videos`;
+      const response = await axios(URL);
+
+      setMovie(response.data);
+
+      console.log(response.data);
+    }
+
+    getMovieDetails();
   }, []);
 
   return (
     <StyledHero>
       <section>
         <div className="hero__left">
-          <h2>{movies.Title}</h2>
-          <h3>Genre: {movies.Genre}</h3>
-          <p>{movies.Plot}</p>
-          <Button>Watch</Button>
+          <h2>{movie.title}</h2>
+          <h3>{genres}</h3>
+          <p>{movie.overview}</p>
+          <Button
+            as="a"
+            href={`https://www.youtube.com/watch?v=${idTrailer}`}
+            target="_blank"
+          >
+            Watch Trailer
+          </Button>
         </div>
         <div className="hero__right">
-          <img src={movies.Poster} alt={movies.Title} />
+          <img src={tmdbImage} alt={movie.Title} />
         </div>
       </section>
     </StyledHero>
   );
-};
+}
 
 export default Hero;
