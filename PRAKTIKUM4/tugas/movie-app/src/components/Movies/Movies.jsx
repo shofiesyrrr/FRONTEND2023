@@ -4,7 +4,7 @@ import styles from "./Movies.module.css";
 import { nanoid } from "nanoid";
 
 const Movies = (props) => {
-  const {movies, setMovies} = props;
+  const {movies, setMovies, title = "Latest Movies"} = props;
 
       function handleClick() {
         const newMovie = {
@@ -21,7 +21,7 @@ const Movies = (props) => {
   return (
     <div className={styles.container}>
       <section className={styles.movies}>
-        <h2 className={styles.movies__title}>Latest Movies</h2>
+        <h2 className={styles.movies__title}>{title}</h2>
         <div className={styles.movie__container}>
           {movies.map((movie) => (
             <Movie movie={movie} key={movie.id} />
