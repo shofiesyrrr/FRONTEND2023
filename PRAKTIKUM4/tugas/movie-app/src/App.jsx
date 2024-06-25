@@ -4,10 +4,11 @@ import Layout from "./Layout/index.jsx";
 import { ThemeProvider } from "styled-components";
 import theme from "./utils/constants/theme";
 import NowPlayingMovie from "./pages/movie/NowPlaying.jsx";
-import CreateMovie from "./pages/movie/Create.jsx";
 import TopRatedMovie from "./pages/movie/TopRated.jsx";
 import PopularMovie from "./pages/movie/Popular.jsx";
 import Detail from "./pages/movie/Detail.jsx";
+import CreateMovie from "./pages/movie/Create.jsx";
+
 function App() {
   return (
     <>
