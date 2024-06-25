@@ -3,6 +3,7 @@ import Movies from "../../components/Movies/Movies";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import DetailMovie from "../../components/DetailMovie";
+import ENDPOINTS from "../../utils/constants/endpoints";
 
 
 function Detail() {
@@ -11,11 +12,7 @@ function Detail() {
 
     useEffect(() => {
         async function getDetailMovie() {
-            const API_KEY = import.meta.env.VITE_API_KEY;
-            const params = `?api_key=${API_KEY}`;
-            const URL = `https://api.themoviedb.org/3/movie/${id}/recommendations${params}`;
-        
-            const response = await axios(URL);
+            const response = await axios(ENDPOINTS.RECOMMENDATION(id));
         
             setMovies(response.data.results);
         }

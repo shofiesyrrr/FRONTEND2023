@@ -2,6 +2,7 @@ import axios from "axios";
 import Movies from "../../components/Movies/Movies";
 import { useState, useEffect } from "react";
 import Hero from "../../components/Hero/Hero";
+import ENDPOINTS from "../../utils/constants/endpoints";
 
 function TopRatedMovie() {
   //membuat state movie
@@ -9,10 +10,7 @@ function TopRatedMovie() {
 
   useEffect(() => {
     async function getMovies() {
-      const API_KEY = import.meta.env.VITE_API_KEY;
-      const URL = `https://api.themoviedb.org/3/movie/top_rated?api_key=${API_KEY}`;
-
-      const response = await axios(URL);
+      const response = await axios(ENDPOINTS.TOP_RATED);
 
       setMovies(response.data.results);
     }

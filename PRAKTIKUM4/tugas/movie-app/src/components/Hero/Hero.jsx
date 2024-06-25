@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import Button from "../../components/ui/Button";
 import axios from "axios";
+import ENDPOINTS from "../../utils/constants/endpoints";
 
 const StyledHero = styled.div`
   /* Small Screen */
@@ -86,8 +87,7 @@ function Hero() {
       const trendingMovie = await getFirstTrendingMovies();
       const id = trendingMovie.id;
 
-      const URL = `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&append_to_response=videos`;
-      const response = await axios(URL);
+     const response = await axios(ENDPOINTS.DETAIL(id));
 
       setMovie(response.data);
 

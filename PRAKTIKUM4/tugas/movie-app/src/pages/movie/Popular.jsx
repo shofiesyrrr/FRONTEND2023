@@ -10,7 +10,6 @@ function PopularMovie() {
 
   useEffect(() => {
     async function getMovies() {
-
       const response = await axios(ENDPOINTS.POPULAR);
 
       setMovies(response.data.results);
