@@ -1,25 +1,21 @@
 import axios from "axios";
-import Movies from "../Movies/Movies";
+import Movies from "../../components/Movies/Movies";
 import { useState, useEffect } from "react";
-import Hero from "../Hero/Hero";
+import Hero from "../../components/Hero/Hero";
 
 function PopularMovie() {
-
-
   //membuat state movie
   const [movies, setMovies] = useState([]);
 
-  useEffect( () => {
+  useEffect(() => {
     async function getMovies() {
-        const API_KEY = import.meta.env.VITE_API_KEY;
-        const URL = `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}`;
+      const API_KEY = import.meta.env.VITE_API_KEY;
+      const URL = `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}`;
 
-        const response = await axios(URL);
+      const response = await axios(URL);
 
-        setMovies(response.data.results);
-
+      setMovies(response.data.results);
     }
-
 
     getMovies();
   }, []);

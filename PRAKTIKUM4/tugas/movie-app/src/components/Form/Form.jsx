@@ -1,6 +1,6 @@
 import React, { useState } from "react";
+import icon2 from "../../assets/image/icon2.png";
 import styles from "./Form.module.css";
-import icon2 from "../assets/image/icon2.png";
 import Alert from "./Alert.jsx";
 import { nanoid } from "nanoid";
 

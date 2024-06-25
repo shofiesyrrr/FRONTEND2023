@@ -1,22 +1,22 @@
-import Movie from "../Movie/Movie.jsx";
+import Movie from "../../components/Movie/Movie.jsx";
 import Button from "../ui/Button/index.jsx";
 import styles from "./Movies.module.css";
 import { nanoid } from "nanoid";
 
 const Movies = (props) => {
-  const {movies, setMovies, title = "Latest Movies"} = props;
+  const { movies, setMovies, title = "Latest Movies" } = props;
 
-      function handleClick() {
-        const newMovie = {
-          id:nanoid(), 
-          title: "Barbie",
-          year: 2019, 
-          type: "Movie",
-          poster: "https://picsum.photos/300/400",
-        };
+  function handleClick() {
+    const newMovie = {
+      id: nanoid(),
+      title: "Barbie",
+      year: 2019,
+      type: "Movie",
+      poster: "https://picsum.photos/300/400",
+    };
 
-        setMovies([...movies, newMovie]);
-      }
+    setMovies([...movies, newMovie]);
+  }
 
   return (
     <div className={styles.container}>
