@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import icon2 from "../../assets/image/icon2.png";
 import styles from "./Form.module.css";
 import Alert from "./Alert.jsx";
 import { nanoid } from "nanoid";
+import MoviesContext from "../../context/MoviesContext.jsx";
 
 const Form = (props) => {
-  const { movies, setMovies } = props;
+  const { setMovies, movies } = useContext(MoviesContext);
   const [formInput, setFormInput] = useState({
     title: {
       value: "",
