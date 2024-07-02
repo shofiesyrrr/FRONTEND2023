@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- script untuk js supaya tidak perlu menginstall -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <!-- script untuk babel -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+
+<body>
+    <div id="app"> </div>
+    <script type="text/jsx">
+        const app = document.getElementById('app');
+        const root = ReactDOM.createRoot(app);
+        function Profile(){
+            return (
+               <ul>
+                <li>Nama : Shofi Syahria Mahram</li>
+                <li>Tempat lahir : Surabaya</li>
+               </ul>
+            )
+        }
+        function Header(){
+            return(
+                <nav>
+                    <ul>
+                        <li>Home</li>
+                        <li>About</li>
+                        <li>Contact</li>
+                    </ul>
+                </nav>
+            );
+        }
+        function Footer(){
+            return(
+                <footer>
+                    <h2>Copyright @shofi2024</h2>
+                </footer>
+            );
+        }
+        function Main(){
+            return (
+                <main>
+                    <Profile/>
+                </main>
+            );
+        }
+        function App(){
+            return(
+                <div>
+                    <Header/>
+                    <Main/>
+                    <Footer/>
+                </div>
+            )
+        }
+        
+        root.render(
+        <div>
+            <App/>
+        </div>)
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,62 @@
+
+
+/* batas form */
+.title{
+  font-family: Poppins;
+  font-size: 3.5rem;
+  color: #8DC6D3;
+}
+
+.form {
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
+    padding: 20px;
+    border-radius: 5px;
+    justify-content: center;
+    gap: 2rem;
+    font-family: 'Poppins';
+    padding: 4rem;
+    background-color: #ffff ;
+  }
+  
+  .form__right {
+    width: 20rem;
+  }
+
+  .formGroup {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .formLabel {
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  .formInput {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+  
+  .submitButton {
+    padding: 10px 20px;
+    background-color: #8DC6D3;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .form__image {
+    width: 500px;
+  }
+
+  @media (max-width: 992px) { 
+    .form {
+      flex-direction: column-reverse;
+      gap: 1.5rem;
+    }
+  }
