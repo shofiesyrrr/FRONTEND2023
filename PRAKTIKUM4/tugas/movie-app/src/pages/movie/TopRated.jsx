@@ -1,12 +1,13 @@
 import axios from "axios";
 import Movies from "../../components/Movies/Movies";
-import { useState, useEffect } from "react";
+import { useContext, useEffect } from "react";
 import Hero from "../../components/Hero/Hero";
 import ENDPOINTS from "../../utils/constants/endpoints";
+import MoviesContext from "../../context/MoviesContext";
 
 function TopRatedMovie() {
-  //membuat state movie
-  const [movies, setMovies] = useState([]);
+  
+  const { setMovies } = useContext(MoviesContext);
 
   useEffect(() => {
     async function getMovies() {
@@ -21,7 +22,7 @@ function TopRatedMovie() {
   return (
     <div>
       <Hero />
-      <Movies movies={movies} title="Top Rated Movies" />
+      <Movies title="Top Rated Movies" />
     </div>
   );
 }

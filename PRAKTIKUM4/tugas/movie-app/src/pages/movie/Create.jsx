@@ -1,7 +1,11 @@
+import Form from "../../components/Form/Form";
+import Hero from "../../components/Hero/Hero";
+
 function CreateMovie() {
   return (
     <>
-        <h2>Create Movie</h2>
+      <Hero />
+      <Form />
     </>
   );
 }
